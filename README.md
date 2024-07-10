@@ -1,2 +1,41 @@
 # rn-assignment7-11357610
 Working with the Fetch API in Expo
+
+In Addition to Assignment 6,
+This repository is to add the following features:
+- Fetching the available products data from an external API
+- Further Customized Drawer component (apply swipe gesture) too 
+
+
+The Design is based on the following link: [UI MockUp](https://drive.google.com/file/d/1GBW0tntCgBbtRXyx1k1tFDKLqksS7hpc/view?usp=sharing)
+
+### The Design Choices for this App:
+- Will maintain the same design as Assignment 6. 
+  - AsyncStorage is used to store the products added to the cart.
+  - ContextAPI for state management
+  - DrawerNavigator is used for navigation.
+- FETCH API is used to fetch the products data.
+- ProductDetailScreen will be included also.
+
+### Development Steps:
+- Cloned the repository
+- Copied the code from Assignment 6
+- Installed required modules
+- Implemented Fetch API to replace Data Array
+
+### Screenshots of the app on Android
+![Screenshot 1](./ShopCart/assets/screenshot-1.jpg)
+![Screenshot 2](./ShopCart/assets/screenshot-2.jpg)
+![Screenshot 3](./ShopCart/assets/screenshot-3.jpg)
+![Screenshot 4](./ShopCart/assets/screenshot-4.jpg)
+![Screenshot 5](./ShopCart/assets/screenshot-5.jpg)
+
+### Running the App
+1. Clone the repository: `git clone https://github.com/your-username/rn-assignment6-11357610.git`
+2. Install dependencies: `npm install`
+3. Start the Expo development server: `expo start`
+4. Use the Expo app on your Android device to run the app, or use an Android emulator.
+
+### Corrections
+If you have any positive criticism, kindly get in touch. 
+Thank you.
