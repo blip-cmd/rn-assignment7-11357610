@@ -7,7 +7,6 @@ export const CartProvider = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [data, setData] = useState([]); // Fetched Available Products Holder
 
-  // Fetch and Set Data
   const fetchData = async () => {
     try {
       const response = await fetch("https://fakestoreapi.com/products");
@@ -19,6 +18,10 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     const fetchCartItems = async () => {
       try {
         const keys = await AsyncStorage.getAllKeys();
@@ -27,8 +30,7 @@ export const CartProvider = ({ children }) => {
           .filter(item => item[0].startsWith('@cart_'))
           .map(item => JSON.parse(item[1]));
         setCartItems(cartItems);
-    
-        const total = cartItems.reduce((sum, item) => sum + parseFloat(item.price.replace('$', '')), 0);
+        const total = cartItems.reduce((sum, item) => sum + item.price, 0);
         setTotalPrice(total);
       } catch (e) {
         console.error(e);
@@ -45,13 +47,13 @@ export const CartProvider = ({ children }) => {
         name: item.title,
         description: item.description,
         price: item.price,
-        imageKey: item.imageKey,
+        image: item.image,
       };
       const jsonValue = JSON.stringify(cartItem);
       await AsyncStorage.setItem(`@cart_${item.id}`, jsonValue);
       const updatedItems = [...cartItems, cartItem];
       setCartItems(updatedItems);
-      const total = updatedItems.reduce((sum, item) => sum + parseFloat(item.price.replace('$', '')), 0);
+      const total = updatedItems.reduce((sum, item) => sum + item.price, 0);
       setTotalPrice(total);
     } catch (e) {
       console.error(e);
@@ -63,7 +65,7 @@ export const CartProvider = ({ children }) => {
       await AsyncStorage.removeItem(`@cart_${id}`);
       const updatedItems = cartItems.filter(item => item.id !== id);
       setCartItems(updatedItems);
-      const total = updatedItems.reduce((sum, item) => sum + parseFloat(item.price.replace('$', '')), 0);
+      const total = updatedItems.reduce((sum, item) => sum + item.price, 0);
       setTotalPrice(total);
     } catch (e) {
       console.error(e);

@@ -21,7 +21,16 @@ The Design is based on the following link: [UI MockUp](https://drive.google.com/
 - Cloned the repository
 - Copied the code from Assignment 6
 - Installed required modules
-- Implemented Fetch API to replace Data Array
+- Implemented Fetch API to replace hard coded Data Array
+  - Had to Ensure price was a number to handle Nan values, while corresponding to the current logic
+  - Had to ensure the product image was a string to handle the image URL.
+  - Selected only necessary fields from the API response.
+  - Used API id to for unique map values
+
+
+### Identified Limits:
+- Although there are multiple productS(count >1), users can't add multiple same products to the cart
+
 
 ### Screenshots of the app on Android
 ![Screenshot 1](./ShopCart/assets/screenshot-1.jpg)

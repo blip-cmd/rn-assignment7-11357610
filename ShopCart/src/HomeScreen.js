@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import CartContext from './CartContext';
-import { imagePaths } from './imagePaths';
 
 const HomeScreen = ({ navigation }) => {
   const { addToCart, data, fetchData } = useContext(CartContext);
@@ -53,8 +52,8 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.grid}>
-            {data.map((item, index) => (
-              <View key={index} style={styles.card}>
+            {data.map((item) => (
+              <View key={item.id} style={styles.card}>
                 <View style={styles.imageContainer}>
                   <Image source={{ uri: item.image }} style={styles.image} />
                   <TouchableOpacity style={styles.addbutton} onPress={() => addToCart(item)}>

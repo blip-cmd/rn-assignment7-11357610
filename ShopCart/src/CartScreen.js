@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import CartContext from './CartContext';
-import { imagePaths } from './imagePaths';
 import { useNavigation } from '@react-navigation/native';
 
 const CartScreen = () => {
@@ -22,12 +21,12 @@ const CartScreen = () => {
           <Image source={require('../assets/checkout.png')} style={styles.checkout} />
         </View>
         {cartItems.map(item => (
-          <View key={item.id} style={[styles.item]}>
-            <Image source={imagePaths[item.imageKey]} style={styles.image} />
-            <View style={[styles.itemDetails]}>
+          <View key={item.id} style={styles.item}>
+            <Image source={{ uri: item.image }} style={styles.image} />
+            <View style={styles.itemDetails}>
               <Text style={styles.name}>{item.name}</Text>
               <Text style={styles.description}>{item.description}</Text>
-              <Text style={styles.price}>{item.price}</Text>
+              <Text style={styles.price}>${item.price}</Text>
             </View>
             <TouchableOpacity onPress={() => removeFromCart(item.id)} style={styles.removeButton}>
               <Image source={require('../assets/remove_circle.png')} style={styles.addIcon} />
@@ -46,6 +45,7 @@ const CartScreen = () => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   itemDetails: {
     flex: 1,
-    },
+  },
   name: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -91,15 +91,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
     margin: 10,
-    paddingBottom:0,
-    
+    paddingBottom: 0,
   },
   searchIcon: {
     marginLeft: 70,
   },
   checkout: {
     height: 70,
-    width: 170, 
+    width: 170,
     marginLeft: 100,
   },
   footer: {
@@ -121,7 +120,7 @@ const styles = StyleSheet.create({
   checkoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     backgroundColor: '#0a0a0a',
     padding: 10,
   },
