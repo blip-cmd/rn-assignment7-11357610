@@ -9,6 +9,26 @@ const HomeScreen = ({ navigation }) => {
     fetchData();
   }, []);
 
+  const renderItem = (item) => {
+    return (
+      <TouchableOpacity 
+  key={item.id} 
+  style={styles.card} 
+  onPress={() => navigation.navigate('Product Details', {item} )}
+>       
+ <View style={styles.imageContainer}> 
+          <Image source={{ uri: item.image }} style={styles.image} />
+          <TouchableOpacity style={styles.addbutton} onPress={() => addToCart(item)}>
+            <Image source={require('../assets/add_circle.png')} />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.description}>{item.category}</Text>
+        <Text style={styles.price}>${item.price}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.scrollViewContainer}>
@@ -37,7 +57,7 @@ const HomeScreen = ({ navigation }) => {
                   height: 34,
                   borderRadius: 25,
                   marginRight: 8,
-                }]}>
+                }]} onPress={() => navigation.navigate('ListView')}>
                 <Image source={require('../assets/Listview.png')} />
               </TouchableOpacity>
               <TouchableOpacity style={[styles.button, 
@@ -46,25 +66,13 @@ const HomeScreen = ({ navigation }) => {
                   width: 34,
                   height: 34,
                   borderRadius: 100,
-                }]}>
+                }]} onPress={() => navigation.navigate('FilterView')}>
                 <Image source={require('../assets/Filter.png')} />
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.grid}>
-            {data.map((item) => (
-              <View key={item.id} style={styles.card}>
-                <View style={styles.imageContainer}>
-                  <Image source={{ uri: item.image }} style={styles.image} />
-                  <TouchableOpacity style={styles.addbutton} onPress={() => addToCart(item)}>
-                    <Image source={require('../assets/add_circle.png')} />
-                  </TouchableOpacity>
-                </View>
-                <Text style={styles.itemTitle}>{item.title}</Text>
-                <Text style={styles.description}>{item.description}</Text>
-                <Text style={styles.price}>${item.price}</Text>
-              </View>
-            ))}
+            {data.map((item) => renderItem(item))}
           </View>
         </View>
       </ScrollView>
@@ -146,24 +154,9 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 20,
     fontWeight: 'slim',
-    color: '#FF6347',
+    color: '#DD8560',
     marginTop: 4,
   },
 });
 
 export default HomeScreen;
-
-
-
-
-  //Available Products Array:
-  // const data = [
-  //   { image: imagePaths.dress1, title: 'Office Wear', description: 'reversible angora cardigan', price: '$120', id: 1, imageKey: 'dress1' },
-  //   { image: imagePaths.dress2, title: 'Black', description: 'reversible angora cardigan', price: '$120', id: 2, imageKey: 'dress2' },
-  //   { image: imagePaths.dress3, title: 'Church Wear', description: 'reversible angora cardigan', price: '$120', id: 3, imageKey: 'dress3' },
-  //   { image: imagePaths.dress4, title: 'Lomere', description: 'reversible angora cardigan', price: '$120', id: 4, imageKey: 'dress4' },
-  //   { image: imagePaths.dress5, title: '2IWN', description: 'reversible angora cardigan', price: '$120', id: 5, imageKey: 'dress5' },
-  //   { image: imagePaths.dress6, title: 'Lopo', description: 'reversible angora cardigan', price: '$120', id: 6, imageKey: 'dress6' },
-  //   { image: imagePaths.dress7, title: '2IWN', description: 'reversible angora cardigan', price: '$120', id: 7, imageKey: 'dress7' },
-  //   { image: imagePaths.dress3, title: 'lame', description: 'reversible angora cardigan', price: '$120', id: 8, imageKey: 'dress3' },
-  // ];
